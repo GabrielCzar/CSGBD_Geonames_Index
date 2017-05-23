@@ -21,7 +21,7 @@ public class Aplicacao {
 
     protected static void showLine (Geoname geoname) {
         System.out.println(
-                corr(geoname.getName(), 20) + " | "
+                corr(geoname.getName(), 30) + " | "
                  + corr(geoname.getCountry(), 11) + " | "
                  + corr(geoname.getPopulation().toString(), 14) + " | "
                  + corr(Float.toString(geoname.getLatitude()), 14) + " | "
@@ -66,12 +66,13 @@ public class Aplicacao {
                     break;
                 case "R":
                     String sql = "select * from geoname g where g.country = 'BR' and g.population > 1000000";
-                    int limite = 1000000;
+                    int limite = 10000000;
                     // System.out.println("Consulta SQL: "); sql = scanner.next();
                     List<Geoname> geonames = dao.getLista(sql, limite);
-                    System.out.println("        Nome         |   Country   |   Population   |    Latitude    |    Longitude   |   ID  ");
+                    System.out.println("             Nome              |   Country   |   Population   |    Latitude    |    Longitude   |   ID  ");
                     for (Geoname geoname : geonames)
                         showLine(geoname);
+                    System.out.println("Quantidade de tuplas: " + String.valueOf(geonames.size()));
                     break;
                 case "E":
                     String sql2 = "explain select * from geoname g where g.country = 'BR' and g.population > 1000000";

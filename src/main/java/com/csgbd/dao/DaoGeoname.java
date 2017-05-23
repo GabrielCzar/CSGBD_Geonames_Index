@@ -1,14 +1,11 @@
 package com.csgbd.dao;
 
 import com.csgbd.model.Geoname;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -114,12 +111,13 @@ public class DaoGeoname {
 
     public static void limparCache () {
         try {
+            Runtime rt = Runtime.getRuntime();
             Scanner scanner = new Scanner(System.in);
             String pass = scanner.next();
-            
             String comando = "sudo su \r\n" + pass + "\r\n /etc/init.d/postgresql stop; echo 3 > /proc/sys/vm/drop_caches; /etc/init.d/postgresql start";
-            Runtime.getRuntime().exec(comando);
-        } catch (IOException e) {
+            rt.exec(comando);
+            System.out.println("Cache foi limpa!");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
